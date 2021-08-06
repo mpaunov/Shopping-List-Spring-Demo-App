@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/header}"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+
+<main>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Register</span></h1>
+    <hr class="hr-3 w-25 bg-white"/>
+    <form th:object="${userRegisterBindingModel}" class="mx-auto w-25 bg-blur rounded" method="post"
+          th:action="@{/users/register}">
+        <div class="form-group">
+            <div class="label-holder textCol d-flex justify-content-center">
+                <label for="username" class="h4 mb-2 text-white">Username</label>
+            </div>
+            <input th:field="*{username}" th:errorclass="bg-danger" type="text" class="form-control" id="username"
+                   name="username"/>
+            <small th:if="${#fields.errors('username')}" th:errors="*{username}" class="text-danger">Username error
+                message</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="email" class="h4 mb-2">Email</label>
+            </div>
+            <input th:field="*{email}" th:errorclass="bg-danger" type="email" class="form-control" id="email"
+                   name="email"/>
+            <small th:if="${#fields.errors('email')}" th:errors="*{email}" class="text-danger">Email error
+                message</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="password" class="h4 mb-2">Password</label>
+            </div>
+            <input th:field="*{password}" th:errorclass="bg-danger" type="password" class="form-control" id="password"
+                   name="password"/>
+            <small th:if="${#fields.errors('password')}" th:errors="*{password}" class="text-danger">Password error
+                message</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
+            </div>
+            <input type="password" th:field="*{confirmPassword}" th:errorclass="bg-danger" class="form-control"
+                   id="confirmPassword"
+                   name="confirmPassword"/>
+            <small th:if="${passwordDiff}" th:text="${passwordDiffMessage}" class="text-danger">Password error
+                message</small>
+        </div>
+
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn btn-warning  mb-3" value="Register">Register</button>
+        </div>
+    </form>
+</main>
+
+<footer class="footer bg-transparent py-2">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</body>
+</html>
